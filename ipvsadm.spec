@@ -33,7 +33,8 @@ CFLAGS="${RPM_OPT_FLAGS}" make
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d ${RPM_BUILD_ROOT}/{sbin,usr/man/man8}
+install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
+install *.8 $RPM_BUILD_ROOT%{_mandir}/man8
 BUILD_ROOT=${RPM_BUILD_ROOT} make install
 
 #File finding code thanks to Samuel Flory of VA Linux Systems
@@ -54,7 +55,8 @@ rm -rf $RPM_BUILD_DIR/%{name}
 rm -rf $RPM_BUILD_ROOT
 rm -f ${RPM_BUILD_DIR}/%{name}-%{version}-%{release}.files
 
-
-%files -f ../%{name}-%{version}-%{release}.files
+%files
 %defattr(644,root,root,755)
+%attr(0755,root,root) %{_sbindir}/ipvsadm
+%{_mandir}/man8/ipvsadm.8*
 %doc README
