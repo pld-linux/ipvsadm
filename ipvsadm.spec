@@ -7,7 +7,7 @@ License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
 Group(pl):	Aplikacje/System
-Source0:	http://www.linuxvirtualserver.org/software/%{name}-%{version}.tar.gz
+Source0:	http://www.linuxvirtualserver.org/software/kernel-2.4/%{name}-%{version}.tar.gz
 URL:		http://www.LinuxVirtualServer.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Conflicts:	piranha <= 0.4.14
