@@ -11,6 +11,7 @@ Source0:	http://www.linuxvirtualserver.org/software/kernel-2.4/%{name}-%{version
 URL:		http://www.LinuxVirtualServer.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Conflicts:	piranha <= 0.4.14
+Conflicts:	kernel-headers < 2.4.17
 
 %define		_sbindir	/sbin
 
