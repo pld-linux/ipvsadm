@@ -1,0 +1,49 @@
+--- ipvsadm-1.21/Makefile.orig	Wed May 21 05:01:57 2003
++++ ipvsadm-1.21/Makefile	Mon Mar 15 11:35:55 2004
+@@ -31,14 +31,14 @@
+ PROGROOT = $(shell basename `pwd`)
+ 
+ CC	= gcc
+-CFLAGS	= -Wall -Wunused -Wstrict-prototypes -g -O2
++CFLAGS	= $(OPT) -Wall -Wunused -Wstrict-prototypes
+ SBIN    = $(BUILD_ROOT)/sbin
+ MANDIR	= usr/man
+ MAN	= $(BUILD_ROOT)/$(MANDIR)/man8
+ INIT    = $(BUILD_ROOT)/etc/rc.d/init.d
+ MKDIR   = mkdir
+ INSTALL = install
+-INCLUDE = -I/usr/src/linux/include -I.. -I.
++INCLUDE = -I.. -I.
+ STATIC_LIBS = libipvs/libipvs.a
+ 
+ 
+@@ -46,18 +46,12 @@
+ # No servicable parts below this line
+ 
+ 
+-IP_VS_H_DEFINE = $(shell if [ ! -f ../ip_vs.h ]; then \
++IP_VS_H_DEFINE = $(shell if [ ! -f ip_vs.h ]; then \
+ 	echo "-DHAVE_NET_IP_VS_H"; fi;)
+ 
+ ifeq (,$(FORCE_GETOPT))
+ LIB_SEARCH = /lib /usr/lib /usr/local/lib
+-POPT_LIB = $(shell for i in $(LIB_SEARCH); do \
+-  if [ -f $$i/libpopt.a ]; then \
+-    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
+-	echo "-L$$i -lpopt"; \
+-    fi; \
+-  fi; \
+-done)
++POPT_LIB = -lpopt
+ endif
+ 
+ ifneq (,$(POPT_LIB))
+@@ -78,7 +72,7 @@
+ 
+ install:        ipvsadm
+ 		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
+-		$(INSTALL) -m 0755 -s ipvsadm $(SBIN)
++		$(INSTALL) -m 0755 ipvsadm $(SBIN)
+ 		$(INSTALL) -m 0755 ipvsadm-save $(SBIN)
+ 		$(INSTALL) -m 0755 ipvsadm-restore $(SBIN)
+ 		[ -d $(MAN) ] || $(MKDIR) -p $(MAN)
