@@ -3,14 +3,14 @@
 Summary:	Utility to administer the Linux Virtual Server
 Summary(pl):	Narzêdzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
-Version:	1.11
+Version:	1.14
 Release:	1
 Copyright:	GNU General Public Licence
 URL:		http://www.LinuxVirtualServer.org/
 Group:		Applications/System
 Group(de):	Applikationen/System
 Group(pl):	Aplikacje/System
-Source0:	http://www.LinuxVirutalServer.org/software/%{name}-%{version}.tar.gz
+Source0: 	http://www.linuxvirtualserver.org/software/ipvsadm-1.14.tar.gz	
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Provides:	%{name}-%{version}
 Obsoletes:	ipvsadm <= 1.10
