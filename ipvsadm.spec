@@ -6,6 +6,7 @@ Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://www.linuxvirtualserver.org/software/kernel-2.4/%{name}-%{version}.tar.gz
+# Source0-md5:	349e32bfee41e0e4e8012831af69c603
 URL:		http://www.LinuxVirtualServer.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 BuildRequires:	popt-devel
