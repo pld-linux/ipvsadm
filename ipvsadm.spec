@@ -4,7 +4,7 @@ Summary:	Utility to administer the Linux Virtual Server
 Summary(pl):	Narzêdzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
 Version:	1.11
-Release:	4
+Release:	1
 Copyright:	GNU General Public Licence
 URL:		http://www.LinuxVirtualServer.org/
 Group:		Applications/System
