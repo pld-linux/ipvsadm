@@ -1,5 +1,3 @@
-%define prefix   /usr
-
 Summary:	Utility to administer the Linux Virtual Server
 Summary(pl):	Narzêdzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
@@ -10,7 +8,7 @@ URL:		http://www.LinuxVirtualServer.org/
 Group:		Applications/System
 Group(de):	Applikationen/System
 Group(pl):	Aplikacje/System
-Source0: 	http://www.linuxvirtualserver.org/software/ipvsadm-1.14.tar.gz	
+Source0:	http://www.linuxvirtualserver.org/software/%{name}-%{version}.tar.gz
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Provides:	%{name}-%{version}
 Obsoletes:	ipvsadm <= 1.10
@@ -26,16 +24,15 @@ mo¿liwo¶æ taka dostêpna po spatchowaniu kernela patchem linux-ipvs
 %prep
 %setup -q -n ipvsadm
 
-
 %build
-CFLAGS="${RPM_OPT_FLAGS}" make
+CFLAGS="%{rpmcflags}" make
 
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sbindir},%{_mandir}/man8}
 install *.8 $RPM_BUILD_ROOT%{_mandir}/man8
-BUILD_ROOT=${RPM_BUILD_ROOT} make install
+BUILD_ROOT=${RPM_BUILD_ROOT} %{__make} install
 
 #File finding code thanks to Samuel Flory of VA Linux Systems
 cd ${RPM_BUILD_ROOT}
@@ -48,7 +45,6 @@ find . -type f | sed "s,^\.\(.*\),%attr (-\,root\,root) \1*," \
 # Symbolic links
 find . -type l | sed 's,^\.,\%attr(-\,root\,root) ,' \
   >> ${RPM_BUILD_DIR}/%{name}-%{version}-%{release}.files
-
 
 %clean
 rm -rf $RPM_BUILD_DIR/%{name}
