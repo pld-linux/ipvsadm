@@ -1,14 +1,16 @@
 Summary:	Utility to administer the Linux Virtual Server
 Summary(pl):	Narzêdzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
-Version:	1.15
-Release:	2
+Version:	1.21
+Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	http://www.linuxvirtualserver.org/software/%{name}-%{version}.tar.gz
+Source0:	http://www.linuxvirtualserver.org/software/kernel-2.4/%{name}-%{version}.tar.gz
 URL:		http://www.LinuxVirtualServer.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	popt-devel
 Conflicts:	piranha <= 0.4.14
+Conflicts:	kernel-headers < 2.4.17
 
 %define		_sbindir	/sbin
 
@@ -21,10 +23,10 @@ ipvsadm jest narzêdziem do administracji wirtualnymi serwerami,
 mo¿liwo¶æ taka dostêpna po spatchowaniu kernela patchem linux-ipvs
 
 %prep
-%setup -q -n ipvsadm
+%setup -q
 
 %build
-CFLAGS="%{rpmcflags}" make
+%{__make} CC="%{__cc}" CFLAGS="%{rpmcflags}"
 
 
 %install
@@ -42,4 +44,4 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README
 %attr(755,root,root) %{_sbindir}/ipvsadm
-%{_mandir}/man8/ipvsadm.8*
+%{_mandir}/man?/ipvsadm.*
