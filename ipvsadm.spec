@@ -40,7 +40,7 @@ install *.8 $RPM_BUILD_ROOT%{_mandir}/man8
 gzip -9nf README
 
 %clean
-rm -rf $RPM_BUILD_DIR
+rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
