@@ -1,7 +1,7 @@
 Summary:	Utility to administer the Linux Virtual Server
 Summary(pl):	Narzêdzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
-Version:	1.15
+Version:	1.20
 Release:	1
 License:	GPL
 Group:		Applications/System
