@@ -6,10 +6,13 @@ Release:	1
 License:	GPL
 Group:		Applications/System
 Group(de):	Applikationen/System
+Group(es):	Aplicaciones/Sistema
 Group(pl):	Aplikacje/System
+Group(pt_BR):	Aplicações/Sistema
 Source0:	http://www.linuxvirtualserver.org/software/kernel-2.4/%{name}-%{version}.tar.gz
 URL:		http://www.LinuxVirtualServer.org/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	popt-devel
 Conflicts:	piranha <= 0.4.14
 Conflicts:	kernel-headers < 2.4.17
 
@@ -27,7 +30,7 @@ mo¿liwo¶æ taka dostêpna po spatchowaniu kernela patchem linux-ipvs
 %setup -q -n ipvsadm
 
 %build
-CFLAGS="%{rpmcflags}" make
+%{__make} CC="%{__cc}" CFLAGS="%{rpmcflags}"
 
 
 %install
