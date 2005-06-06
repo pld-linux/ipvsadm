@@ -1,8 +1,17 @@
---- ipvsadm-1.21-11/Makefile.orig	Sat Jan 22 04:07:42 2005
-+++ ipvsadm-1.21-11/Makefile	Sat Jun  4 16:26:42 2005
-@@ -34,9 +34,9 @@
+--- ipvsadm-1.24/Makefile.orig	2004-10-27 17:53:07.000000000 +0200
++++ ipvsadm-1.24/Makefile	2005-06-06 21:23:52.864458968 +0200
+@@ -33,7 +33,7 @@
+ ARCH		= $(shell uname -m)
  
- CC	= gcc
+ CC		= gcc
+-INCLUDE		= -I/usr/src/linux/include -I.. -I.
++INCLUDE		= -I.. -I.
+ SBIN		= $(BUILD_ROOT)/sbin
+ MANDIR		= usr/man
+ MAN		= $(BUILD_ROOT)/$(MANDIR)/man8
+@@ -43,9 +43,9 @@
+ STATIC_LIBS	= libipvs/libipvs.a
+ 
  ifeq "${ARCH}" "sparc64"
 -    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g -O2 -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
 +    CFLAGS = $(OPT) -Wall -Wunused -Wstrict-prototypes -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
@@ -10,27 +19,13 @@
 -    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g -O2
 +    CFLAGS = $(OPT) -Wall -Wunused -Wstrict-prototypes
  endif
- SBIN    = $(BUILD_ROOT)/sbin
- MANDIR	= usr/man
-@@ -45,7 +45,7 @@
- MKDIR   = mkdir
- INSTALL = install
- KERNELSOURCE = /usr/src/linux
--INCLUDE = -I$(KERNELSOURCE)/include -I.. -I.
-+INCLUDE = -I.. -I.
- STATIC_LIBS = libipvs/libipvs.a
  
  
-@@ -59,18 +59,12 @@
- 		echo "rpm";			\
+@@ -60,14 +60,7 @@
  	fi )
  
--IP_VS_H_DEFINE = $(shell if [ ! -f ../ip_vs.h ]; then \
-+IP_VS_H_DEFINE = $(shell if [ ! -f ip_vs.h ]; then \
- 	echo "-DHAVE_NET_IP_VS_H"; fi;)
- 
  ifeq (,$(FORCE_GETOPT))
- LIB_SEARCH = /lib /usr/lib /usr/local/lib
+-LIB_SEARCH = /lib /usr/lib /usr/local/lib
 -POPT_LIB = $(shell for i in $(LIB_SEARCH); do \
 -  if [ -f $$i/libpopt.a ]; then \
 -    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
@@ -42,12 +37,41 @@
  endif
  
  ifneq (,$(POPT_LIB))
-@@ -91,7 +85,7 @@
+@@ -78,7 +71,7 @@
+ LIBS		= $(POPT_LIB)
+ DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
+ 		  $(POPT_DEFINE)
+-DEFINES		+= $(shell if [ ! -f ../ip_vs.h ]; then	\
++DEFINES		+= $(shell if [ ! -f ip_vs.h ]; then	\
+ 		     echo "-DHAVE_NET_IP_VS_H"; fi;)
  
- install:        ipvsadm
+ 
+@@ -94,7 +87,7 @@
+ 
+ install:        all
  		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
 -		$(INSTALL) -m 0755 -s ipvsadm $(SBIN)
 +		$(INSTALL) -m 0755 ipvsadm $(SBIN)
  		$(INSTALL) -m 0755 ipvsadm-save $(SBIN)
  		$(INSTALL) -m 0755 ipvsadm-restore $(SBIN)
  		[ -d $(MAN) ] || $(MKDIR) -p $(MAN)
+--- ipvsadm-1.24/libipvs/Makefile.orig	2002-12-19 14:53:07.000000000 +0100
++++ ipvsadm-1.24/libipvs/Makefile	2005-06-06 21:25:13.995125232 +0200
+@@ -1,12 +1,12 @@
+ # Makefile for libipvs
+ 
+ CC		= gcc
+-INCLUDE		= -I/usr/src/linux/include
+-CFLAGS		= -Wall -Wunused -Wstrict-prototypes -g -O2
++INCLUDE		=
++CFLAGS		= $(OPT) -Wall -Wunused -Wstrict-prototypes
+ 
+-INCLUDE		+= $(shell if [ -f ../../ip_vs.h ]; then	\
+-		     echo "-I../../."; fi;)
+-DEFINES		= $(shell if [ ! -f ../../ip_vs.h ]; then	\
++INCLUDE		+= $(shell if [ -f ../ip_vs.h ]; then	\
++		     echo "-I.."; fi;)
++DEFINES		= $(shell if [ ! -f ../ip_vs.h ]; then	\
+ 		    echo "-DHAVE_NET_IP_VS_H"; fi;)
+ 
+ .PHONY		= all clean install dist distclean rpm rpms
