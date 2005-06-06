@@ -8,7 +8,7 @@
 
 #include <asm/types.h>          /* For __uXX types */
 
-#define IP_VS_VERSION_CODE            0x010007
+#define IP_VS_VERSION_CODE            0x01000C
 #define NVERSION(version)                       \
 	(version >> 16) & 0xFF,                 \
 	(version >> 8) & 0xFF,                  \
@@ -97,6 +97,7 @@ struct ip_vs_rule_user {
 	int             state;          /* sync daemon state */
 	char            mcast_ifn[IP_VS_IFNAME_MAXLEN];
 					/* multicast interface name */
+	int		syncid;
 
 	/* virtual service options */
 	u_int16_t	protocol;
@@ -213,8 +214,9 @@ struct ip_vs_timeout_user {
 
 /* The argument to IP_VS_SO_GET_DAEMON */
 struct ip_vs_daemon_user {
-	int	state;				/* sync daemon state */
-	char	mcast_ifn[IP_VS_IFNAME_MAXLEN];	/* multicast interface name */
+	int	state;					/* sync daemon state */
+	char	mcast_master_ifn[IP_VS_IFNAME_MAXLEN];	/* mcast master interface name */
+	char	mcast_backup_ifn[IP_VS_IFNAME_MAXLEN];	/* mcast backup interface name */
 };
 
 #endif	/* _IP_VS_H */
