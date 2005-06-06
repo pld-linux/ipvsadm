@@ -1,18 +1,20 @@
 Summary:	Utility to administer the Linux Virtual Server
 Summary(pl):	Narzêdzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
-Version:	1.21
+%define	ver	1.21
+%define	rel	11
+Version:	%{ver}.%{rel}
 Release:	1
 License:	GPL
 Group:		Applications/System
-Source0:	http://www.linuxvirtualserver.org/software/kernel-2.4/%{name}-%{version}.tar.gz
-# Source0-md5:	349e32bfee41e0e4e8012831af69c603
+Source0:	http://www.linuxvirtualserver.org/software/kernel-2.4/%{name}-%{ver}-%{rel}.tar.gz
+# Source0-md5:	6890a15e6b9887320b4582db2d89878d
 Source1:	%{name}-ip_vs.h
 Patch0:		%{name}-make.patch
 URL:		http://www.LinuxVirtualServer.org/
 BuildRequires:	popt-devel
 Conflicts:	piranha <= 0.4.14
-Conflicts:	kernel < 2.4.0
+Conflicts:	kernel < 2.4.29
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
@@ -28,7 +30,7 @@ umo¿liwia j±dro Linuksa z modu³ami IPVS (dostêpnymi jako ³ata od
 d³u¿szego czasu, w³±czonymi do j±dra od 2.4.23).
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{ver}-%{rel}
 %patch0 -p1
 
 cp -f %{SOURCE1} ip_vs.h
