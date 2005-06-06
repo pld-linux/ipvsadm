@@ -1,25 +1,29 @@
---- ipvsadm-1.21/Makefile.orig	Wed May 21 05:01:57 2003
-+++ ipvsadm-1.21/Makefile	Mon Mar 15 11:35:55 2004
-@@ -31,14 +31,14 @@
- PROGROOT = $(shell basename `pwd`)
+--- ipvsadm-1.21-11/Makefile.orig	Sat Jan 22 04:07:42 2005
++++ ipvsadm-1.21-11/Makefile	Sat Jun  4 16:26:42 2005
+@@ -34,9 +34,9 @@
  
  CC	= gcc
--CFLAGS	= -Wall -Wunused -Wstrict-prototypes -g -O2
-+CFLAGS	= $(OPT) -Wall -Wunused -Wstrict-prototypes
+ ifeq "${ARCH}" "sparc64"
+-    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g -O2 -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
++    CFLAGS = $(OPT) -Wall -Wunused -Wstrict-prototypes -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
+ else
+-    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g -O2
++    CFLAGS = $(OPT) -Wall -Wunused -Wstrict-prototypes
+ endif
  SBIN    = $(BUILD_ROOT)/sbin
  MANDIR	= usr/man
- MAN	= $(BUILD_ROOT)/$(MANDIR)/man8
- INIT    = $(BUILD_ROOT)/etc/rc.d/init.d
+@@ -45,7 +45,7 @@
  MKDIR   = mkdir
  INSTALL = install
--INCLUDE = -I/usr/src/linux/include -I.. -I.
+ KERNELSOURCE = /usr/src/linux
+-INCLUDE = -I$(KERNELSOURCE)/include -I.. -I.
 +INCLUDE = -I.. -I.
  STATIC_LIBS = libipvs/libipvs.a
  
  
-@@ -46,18 +46,12 @@
- # No servicable parts below this line
- 
+@@ -59,18 +59,12 @@
+ 		echo "rpm";			\
+ 	fi )
  
 -IP_VS_H_DEFINE = $(shell if [ ! -f ../ip_vs.h ]; then \
 +IP_VS_H_DEFINE = $(shell if [ ! -f ip_vs.h ]; then \
@@ -38,7 +42,7 @@
  endif
  
  ifneq (,$(POPT_LIB))
-@@ -78,7 +72,7 @@
+@@ -91,7 +85,7 @@
  
  install:        ipvsadm
  		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
