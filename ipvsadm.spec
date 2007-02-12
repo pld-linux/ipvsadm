@@ -1,5 +1,5 @@
 Summary:	Utility to administer the Linux Virtual Server
-Summary(pl):	Narzêdzie do administracji wirtualnymi serwerami
+Summary(pl.UTF-8):   NarzÄ™dzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
 Version:	1.24
 Release:	1
@@ -24,10 +24,10 @@ offered by the Linux kernel augmented with the virtual server modules
 (available as patch for long time, merged into kernel since 2.4.23).
 This version supports Linux 2.6.x series.
 
-%description -l pl
-ipvsadm jest narzêdziem do administracji wirtualnymi serwerami, co
-umo¿liwia j±dro Linuksa z modu³ami IPVS (dostêpnymi jako ³ata od
-d³u¿szego czasu, w³±czonymi do j±dra od 2.4.23). Ta wersja obs³uguje
+%description -l pl.UTF-8
+ipvsadm jest narzÄ™dziem do administracji wirtualnymi serwerami, co
+umoÅ¼liwia jÄ…dro Linuksa z moduÅ‚ami IPVS (dostÄ™pnymi jako Å‚ata od
+dÅ‚uÅ¼szego czasu, wÅ‚Ä…czonymi do jÄ…dra od 2.4.23). Ta wersja obsÅ‚uguje
 wersje Linuksa 2.6.x.
 
 %prep
