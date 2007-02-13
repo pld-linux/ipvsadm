@@ -1,5 +1,5 @@
 Summary:	Utility to administer the Linux Virtual Server
-Summary(pl.UTF-8):   Narzędzie do administracji wirtualnymi serwerami
+Summary(pl.UTF-8):	Narzędzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
 Version:	1.24
 Release:	1
