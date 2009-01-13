@@ -4,8 +4,8 @@
  ARCH		= $(shell uname -m)
  
  CC		= gcc
--INCLUDE		= -I/usr/src/linux/include -I.. -I.
-+INCLUDE		= -I.. -I.
+-INCLUDE		=
++INCLUDE		= 
  SBIN		= $(BUILD_ROOT)/sbin
  MANDIR		= usr/man
  MAN		= $(BUILD_ROOT)/$(MANDIR)/man8
@@ -13,10 +13,10 @@
  STATIC_LIBS	= libipvs/libipvs.a
  
  ifeq "${ARCH}" "sparc64"
--    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g -O2 -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
+-    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
 +    CFLAGS = $(OPT) -Wall -Wunused -Wstrict-prototypes -m64 -pipe -mcpu=ultrasparc -mcmodel=medlow
  else
--    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g -O2
+-    CFLAGS = -Wall -Wunused -Wstrict-prototypes -g
 +    CFLAGS = $(OPT) -Wall -Wunused -Wstrict-prototypes
  endif
  
@@ -29,7 +29,7 @@
 -POPT_LIB = $(shell for i in $(LIB_SEARCH); do \
 -  if [ -f $$i/libpopt.a ]; then \
 -    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
--	echo "-L$$i -lpopt"; \
+-	echo "-lpopt"; \
 -    fi; \
 -  fi; \
 -done)
@@ -57,14 +57,15 @@
  		[ -d $(MAN) ] || $(MKDIR) -p $(MAN)
 --- ipvsadm-1.24/libipvs/Makefile.orig	2002-12-19 14:53:07.000000000 +0100
 +++ ipvsadm-1.24/libipvs/Makefile	2005-06-06 21:25:13.995125232 +0200
-@@ -1,12 +1,12 @@
+@@ -1,14 +1,14 @@
  # Makefile for libipvs
  
  CC		= gcc
--INCLUDE		= -I/usr/src/linux/include
--CFLAGS		= -Wall -Wunused -Wstrict-prototypes -g -O2
-+INCLUDE		=
-+CFLAGS		= $(OPT) -Wall -Wunused -Wstrict-prototypes
+-CFLAGS		= -Wall -Wunused -Wstrict-prototypes -g -fPIC
++CFLAGS		= $(OPT) -Wall -Wunused -Wstrict-prototypes -fPIC
+ ifneq (0,$(HAVE_NL))
+ CFLAGS		+= -DLIBIPVS_USE_NL
+ endif
  
 -INCLUDE		+= $(shell if [ -f ../../ip_vs.h ]; then	\
 -		     echo "-I../../."; fi;)

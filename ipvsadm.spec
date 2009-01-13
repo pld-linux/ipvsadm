@@ -1,15 +1,16 @@
 Summary:	Utility to administer the Linux Virtual Server
 Summary(pl.UTF-8):	Narzędzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
-Version:	1.24
+Version:	1.25
 Release:	1
 License:	GPL
 Group:		Applications/System
 Source0:	http://www.linuxvirtualserver.org/software/kernel-2.6/%{name}-%{version}.tar.gz
-# Source0-md5:	a9378adf5af7a799535b4c26cf3bcf10
+# Source0-md5:	772a053f5fe888cd25784c5f55d31fc3
 Source1:	%{name}-ip_vs.h
 Patch0:		%{name}-make.patch
 URL:		http://www.LinuxVirtualServer.org/
+BuildRequires:	libnl-devel
 BuildRequires:	popt-devel
 Conflicts:	ipvsadm24
 Conflicts:	piranha <= 0.4.14
