@@ -9,6 +9,7 @@ Source0:	http://www.linuxvirtualserver.org/software/kernel-2.6/%{name}-%{version
 # Source0-md5:	772a053f5fe888cd25784c5f55d31fc3
 Source1:	%{name}-ip_vs.h
 Patch0:		%{name}-make.patch
+Patch1:		%{name}-activeconn.patch
 URL:		http://www.LinuxVirtualServer.org/
 BuildRequires:	libnl-devel
 BuildRequires:	popt-devel
@@ -34,6 +35,7 @@ wersje Linuksa 2.6.x.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p0
 
 cp -f %{SOURCE1} ip_vs.h
 
