@@ -40,7 +40,7 @@ wersje Linuksa 2.6.x.
 cp -f %{SOURCE1} ip_vs.h
 
 %build
-%{__make} \
+%{__make} -j1 \
 	CC="%{__cc}" \
 	OPT="%{rpmcflags}"
 
