@@ -21,15 +21,16 @@
  endif
  
  
-@@ -60,14 +60,7 @@
+@@ -60,15 +60,7 @@
  	fi )
  
  ifeq (,$(FORCE_GETOPT))
--LIB_SEARCH = /lib /usr/lib /usr/local/lib
+-LIB_SEARCH = /lib64 /usr/lib64 /usr/local/lib64 /lib /usr/lib /usr/local/lib
 -POPT_LIB = $(shell for i in $(LIB_SEARCH); do \
 -  if [ -f $$i/libpopt.a ]; then \
 -    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
 -	echo "-lpopt"; \
+-	break; \
 -    fi; \
 -  fi; \
 -done)
@@ -40,21 +41,12 @@
 @@ -78,7 +71,7 @@
  LIBS		= $(POPT_LIB)
  DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
- 		  $(POPT_DEFINE)
+		  -DPE_LIST=\"$(PE_LIST)\" $(POPT_DEFINE)
 -DEFINES		+= $(shell if [ ! -f ../ip_vs.h ]; then	\
 +DEFINES		+= $(shell if [ ! -f ip_vs.h ]; then	\
  		     echo "-DHAVE_NET_IP_VS_H"; fi;)
  
  
-@@ -94,7 +87,7 @@
- 
- install:        all
- 		if [ ! -d $(SBIN) ]; then $(MKDIR) -p $(SBIN); fi
--		$(INSTALL) -m 0755 -s ipvsadm $(SBIN)
-+		$(INSTALL) -m 0755 ipvsadm $(SBIN)
- 		$(INSTALL) -m 0755 ipvsadm-save $(SBIN)
- 		$(INSTALL) -m 0755 ipvsadm-restore $(SBIN)
- 		[ -d $(MAN) ] || $(MKDIR) -p $(MAN)
 --- ipvsadm-1.24/libipvs/Makefile.orig	2002-12-19 14:53:07.000000000 +0100
 +++ ipvsadm-1.24/libipvs/Makefile	2005-06-06 21:25:13.995125232 +0200
 @@ -1,14 +1,14 @@
