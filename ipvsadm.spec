@@ -3,11 +3,10 @@ Summary(pl.UTF-8):	Narzędzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
 Version:	1.26
 Release:	1
-License:	GPL
+License:	GPL v2+
 Group:		Applications/System
 Source0:	http://www.linuxvirtualserver.org/software/kernel-2.6/%{name}-%{version}.tar.gz
 # Source0-md5:	eac3ba3f62cd4dea2da353aeddd353a8
-Source1:	%{name}-ip_vs.h
 Patch0:		%{name}-make.patch
 URL:		http://www.LinuxVirtualServer.org/
 BuildRequires:	libnl-devel
@@ -34,8 +33,6 @@ wersje Linuksa 2.6.x.
 %prep
 %setup -q
 %patch0 -p1
-
-cp -f %{SOURCE1} ip_vs.h
 
 %build
 %{__make} -j1 \

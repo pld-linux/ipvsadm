@@ -1,5 +1,5 @@
---- ipvsadm-1.24/Makefile.orig	2004-10-27 17:53:07.000000000 +0200
-+++ ipvsadm-1.24/Makefile	2005-06-06 21:23:52.864458968 +0200
+--- ipvsadm-1.26/Makefile.orig	2004-10-27 17:53:07.000000000 +0200
++++ ipvsadm-1.26/Makefile	2005-06-06 21:23:52.864458968 +0200
 @@ -33,7 +33,7 @@
  ARCH		= $(shell uname -m)
  
@@ -38,18 +38,17 @@
  endif
  
  ifneq (,$(POPT_LIB))
-@@ -78,7 +71,7 @@
+@@ -78,7 +71,5 @@
  LIBS		= $(POPT_LIB)
  DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
 		  -DPE_LIST=\"$(PE_LIST)\" $(POPT_DEFINE)
 -DEFINES		+= $(shell if [ ! -f ../ip_vs.h ]; then	\
-+DEFINES		+= $(shell if [ ! -f ip_vs.h ]; then	\
- 		     echo "-DHAVE_NET_IP_VS_H"; fi;)
+-		     echo "-DHAVE_NET_IP_VS_H"; fi;)
  
  
 --- ipvsadm-1.24/libipvs/Makefile.orig	2002-12-19 14:53:07.000000000 +0100
 +++ ipvsadm-1.24/libipvs/Makefile	2005-06-06 21:25:13.995125232 +0200
-@@ -1,14 +1,14 @@
+@@ -1,14 +1,10 @@
  # Makefile for libipvs
  
  CC		= gcc
@@ -62,9 +61,6 @@
 -INCLUDE		+= $(shell if [ -f ../../ip_vs.h ]; then	\
 -		     echo "-I../../."; fi;)
 -DEFINES		= $(shell if [ ! -f ../../ip_vs.h ]; then	\
-+INCLUDE		+= $(shell if [ -f ../ip_vs.h ]; then	\
-+		     echo "-I.."; fi;)
-+DEFINES		= $(shell if [ ! -f ../ip_vs.h ]; then	\
- 		    echo "-DHAVE_NET_IP_VS_H"; fi;)
+-		    echo "-DHAVE_NET_IP_VS_H"; fi;)
  
  .PHONY		= all clean install dist distclean rpm rpms
