@@ -21,23 +21,6 @@
  endif
  
  
-@@ -60,15 +60,7 @@
- 	fi )
- 
- ifeq (,$(FORCE_GETOPT))
--LIB_SEARCH = /lib64 /usr/lib64 /usr/local/lib64 /lib /usr/lib /usr/local/lib
--POPT_LIB = $(shell for i in $(LIB_SEARCH); do \
--  if [ -f $$i/libpopt.a ]; then \
--    if nm $$i/libpopt.a | fgrep -q poptGetContext; then \
--	echo "-lpopt"; \
--	break; \
--    fi; \
--  fi; \
--done)
-+POPT_LIB = -lpopt
- endif
- 
- ifneq (,$(POPT_LIB))
 @@ -78,7 +71,5 @@
  LIBS		= $(POPT_LIB)
  DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
@@ -46,9 +29,9 @@
 -		     echo "-DHAVE_NET_IP_VS_H"; fi;)
  
  
---- ipvsadm-1.24/libipvs/Makefile.orig	2002-12-19 14:53:07.000000000 +0100
-+++ ipvsadm-1.24/libipvs/Makefile	2005-06-06 21:25:13.995125232 +0200
-@@ -1,14 +1,10 @@
+--- ipvsadm-1.27/libipvs/Makefile.orig	2013-09-09 20:55:27.408302252 +0200
++++ ipvsadm-1.27/libipvs/Makefile	2013-09-09 20:57:00.548298367 +0200
+@@ -1,7 +1,7 @@
  # Makefile for libipvs
  
  CC		= gcc
@@ -56,11 +39,15 @@
 +CFLAGS		= $(OPT) -Wall -Wunused -Wstrict-prototypes -fPIC
  ifneq (0,$(HAVE_NL))
  CFLAGS		+= -DLIBIPVS_USE_NL
+ CFLAGS		+= $(shell \
+@@ -13,10 +13,6 @@
+ 		fi)
  endif
  
 -INCLUDE		+= $(shell if [ -f ../../ip_vs.h ]; then	\
 -		     echo "-I../../."; fi;)
 -DEFINES		= $(shell if [ ! -f ../../ip_vs.h ]; then	\
 -		    echo "-DHAVE_NET_IP_VS_H"; fi;)
- 
- .PHONY		= all clean install dist distclean rpm rpms
+ DEFINES		+= $(shell if which pkg-config > /dev/null 2>&1; then \
+ 			 if   pkg-config --exists libnl-3.0; then :; \
+ 			 elif pkg-config --exists libnl-2.0; then :; \

@@ -1,19 +1,22 @@
+# TODO: PLDify init script
 Summary:	Utility to administer the Linux Virtual Server
 Summary(pl.UTF-8):	Narzędzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
-Version:	1.26
-Release:	3
+Version:	1.27
+Release:	1
 License:	GPL v2+
 Group:		Applications/System
-Source0:	http://www.linuxvirtualserver.org/software/kernel-2.6/%{name}-%{version}.tar.gz
-# Source0-md5:	eac3ba3f62cd4dea2da353aeddd353a8
+Source0:	https://www.kernel.org/pub/linux/utils/kernel/ipvsadm/%{name}-%{version}.tar.xz
+# Source0-md5:	9decaaaad2fd637ed06cffd954e66cf3
 Patch0:		%{name}-make.patch
 URL:		http://www.LinuxVirtualServer.org/
-BuildRequires:	libnl-devel
+BuildRequires:	libnl-devel >= 3.2
 BuildRequires:	popt-devel
+BuildRequires:	tar >= 1:1.22
+BuildRequires:	xz
 Conflicts:	ipvsadm24
 Conflicts:	piranha <= 0.4.14
-#Conflicts:	kernel < 2.6.?
+Requires:	uname(release) >= 2.6
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_sbindir	/sbin
@@ -52,10 +55,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README
+%doc MAINTAINERS README
 %attr(755,root,root) %{_sbindir}/ipvsadm
 %attr(755,root,root) %{_sbindir}/ipvsadm-save
 %attr(755,root,root) %{_sbindir}/ipvsadm-restore
+#%attr(754,root,root) /etc/rc.d/init.d/ipvsadm
+#%config(noreplace) %verify(not md5 mtime size) /etc/sysconfig/ipvsadm
 %{_mandir}/man8/ipvsadm.8*
 %{_mandir}/man8/ipvsadm-save.8*
 %{_mandir}/man8/ipvsadm-restore.8*
