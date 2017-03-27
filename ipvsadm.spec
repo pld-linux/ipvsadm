@@ -2,12 +2,12 @@
 Summary:	Utility to administer the Linux Virtual Server
 Summary(pl.UTF-8):	Narzędzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
-Version:	1.28
+Version:	1.29
 Release:	1
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://www.kernel.org/pub/linux/utils/kernel/ipvsadm/%{name}-%{version}.tar.xz
-# Source0-md5:	b2c8fa302d5a9e9ebd4f60dd34aecd83
+# Source0-md5:	12f0d3b4d436e941d0c4dbe358144bfd
 Patch0:		%{name}-make.patch
 URL:		http://www.LinuxVirtualServer.org/
 BuildRequires:	libnl-devel >= 3.2
