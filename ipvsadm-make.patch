@@ -1,7 +1,8 @@
---- ipvsadm-1.26/Makefile.orig	2004-10-27 17:53:07.000000000 +0200
-+++ ipvsadm-1.26/Makefile	2005-06-06 21:23:52.864458968 +0200
-@@ -33,7 +33,7 @@
- ARCH		= $(shell uname -m)
+diff -urNp -x '*.orig' ipvsadm-1.31.org/Makefile ipvsadm-1.31/Makefile
+--- ipvsadm-1.31.org/Makefile	2019-12-24 14:20:30.000000000 +0100
++++ ipvsadm-1.31/Makefile	2024-04-25 23:17:44.241816304 +0200
+@@ -36,7 +36,7 @@ RPMSOURCEDIR	= $(shell rpm --eval '%_sou
+ RPMSPECDIR	= $(shell rpm --eval '%_specdir')
  
  CC		= gcc
 -INCLUDE		=
@@ -9,7 +10,7 @@
  SBIN		= $(BUILD_ROOT)/sbin
  MANDIR		= usr/man
  MAN		= $(BUILD_ROOT)/$(MANDIR)/man8
-@@ -43,9 +43,9 @@
+@@ -46,9 +46,9 @@ INSTALL		= install
  STATIC_LIBS	= libipvs/libipvs.a
  
  ifeq "${ARCH}" "sparc64"
@@ -21,16 +22,18 @@
  endif
  
  
-@@ -78,7 +71,5 @@
- LIBS		= $(POPT_LIB)
+@@ -75,8 +75,6 @@ LIBS		+= $(shell \
+ endif
  DEFINES		= -DVERSION=\"$(VERSION)\" -DSCHEDULERS=\"$(SCHEDULERS)\" \
-		  -DPE_LIST=\"$(PE_LIST)\" $(POPT_DEFINE)
+ 		  -DPE_LIST=\"$(PE_LIST)\" $(POPT_DEFINE)
 -DEFINES		+= $(shell if [ ! -f ../ip_vs.h ]; then	\
 -		     echo "-DHAVE_NET_IP_VS_H"; fi;)
  
  
---- ipvsadm-1.27/libipvs/Makefile.orig	2013-09-09 20:55:27.408302252 +0200
-+++ ipvsadm-1.27/libipvs/Makefile	2013-09-09 20:57:00.548298367 +0200
+ .PHONY	= all clean install dist distclean rpm rpms
+diff -urNp -x '*.orig' ipvsadm-1.31.org/libipvs/Makefile ipvsadm-1.31/libipvs/Makefile
+--- ipvsadm-1.31.org/libipvs/Makefile	2019-12-24 14:20:30.000000000 +0100
++++ ipvsadm-1.31/libipvs/Makefile	2024-04-25 23:17:44.241816304 +0200
 @@ -1,7 +1,7 @@
  # Makefile for libipvs
  
@@ -40,7 +43,7 @@
  ifneq (0,$(HAVE_NL))
  CFLAGS		+= -DLIBIPVS_USE_NL
  CFLAGS		+= $(shell \
-@@ -13,10 +13,6 @@
+@@ -13,10 +13,6 @@ CFLAGS		+= $(shell \
  		fi)
  endif
  
