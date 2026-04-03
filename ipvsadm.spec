@@ -3,7 +3,7 @@ Summary:	Utility to administer the Linux Virtual Server
 Summary(pl.UTF-8):	Narzędzie do administracji wirtualnymi serwerami
 Name:		ipvsadm
 Version:	1.31
-Release:	1
+Release:	2
 License:	GPL v2+
 Group:		Applications/System
 Source0:	https://www.kernel.org/pub/linux/utils/kernel/ipvsadm/%{name}-%{version}.tar.xz
